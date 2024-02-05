@@ -6,6 +6,7 @@ from django.views import View
 
 # Create your views here.
 class UserSignup(View):
+    """"User Signup View """
     template_name = 'accounts/signup.html'
     form_class = SignupForm
 
@@ -22,6 +23,7 @@ class UserSignup(View):
             return render(request, self.template_name, {'form': form})
         
 class UserLogin(View):
+    """"User Login View """
     template_name = 'accounts/login.html'
     form_class = LoginForm
 
@@ -41,6 +43,7 @@ class UserLogin(View):
         return render(request, self.template_name, {'form': form})
 
 class AdminLogin(View):
+    """"Admin Login View """
     template_name = 'accounts/adminlogin.html'
     form_class = LoginForm
 
@@ -63,6 +66,7 @@ class AdminLogin(View):
     
     
 class UserLogout(View):
+    """"Logout View"""
     def get(self,request):
         logout(request)
         return HttpResponseRedirect(reverse("flight:home"))

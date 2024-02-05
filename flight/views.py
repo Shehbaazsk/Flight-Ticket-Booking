@@ -12,6 +12,7 @@ from django.utils.decorators import method_decorator
 # Create your views here.
 
 class Home(View):
+    """"Home View - This list all flight from current date time or as request of user"""
     template_name = "flight/flightlist.html"
     form_class = FlightSearch
 
@@ -27,6 +28,7 @@ class Home(View):
 
 @method_decorator(staff_member_required,name="dispatch") 
 class AddFlight(View):
+    """"Add Flight View - Only staff member i.e admin can add the flight"""
     login_url = "accounts:admin_login"
     template_name = "flight/addflight.html"
     form_class = FlightForm
@@ -45,6 +47,7 @@ class AddFlight(View):
 
 @method_decorator(staff_member_required,name="dispatch") 
 class RemoveFlight(View):
+    """"Remove Flight View - Only staff member i.e admin can remove the flight"""
     login_url = "accounts:admin_login"
 
     def get(self,request,pk):

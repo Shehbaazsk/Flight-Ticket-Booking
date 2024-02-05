@@ -9,6 +9,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 # Create your views here.
 
 class MyTicket(LoginRequiredMixin,View):
+    """" User Ticket View - user can fetch all their booked tickets"""
     login_url = 'accounts:login'
     template_name = 'bookings/mybooking.html'
 
@@ -21,6 +22,7 @@ class MyTicket(LoginRequiredMixin,View):
 
 
 class TicketBookingView(LoginRequiredMixin,View):
+    """"Ticket Booking View -  user can book flight tickets"""
     login_url = 'accounts:login'
     tempate_name = 'bookings/ticketbooking.html'
     form_class = TicketBookingForm
@@ -47,6 +49,7 @@ class TicketBookingView(LoginRequiredMixin,View):
         return HttpResponsePermanentRedirect(reverse("bookings:confirm_ticket",args=[ticket.id]))
     
 class TicketConfirmView(LoginRequiredMixin,View):
+    """" Ticket Confirm View -  user can confirm their ticket before booking"""
     login_url = 'accounts:login'
     template_name = "bookings/ticketconfirm.html"
 

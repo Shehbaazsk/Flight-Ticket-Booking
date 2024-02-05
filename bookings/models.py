@@ -7,6 +7,7 @@ from flight.models import Flight
 ### Here we can alos integrate payment gateway but for simpllicity I'm not doing ###
 
 class TicketBooking(models.Model):
+    """"Ticket Booking Model"""
     class ClassType(models.TextChoices):
         BUSINESS = 'Business'
         ECONOMY = 'Economy'
