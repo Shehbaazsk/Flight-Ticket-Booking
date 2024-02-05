@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %} Confirm Ticket{% endblock title %}
+
+
+{% block content %}
+   <h3>Review Ticket Details</h3> <br><br>
+   <h5>Ticket Id : {{ticket.id }}</h5>
+   <h5>Fight Name : {{ticket.flight_id.plane_name }}</h5>
+   <h5> From : "{{ticket.flight_id.origin }}" To  "{{ticket.flight_id.destination }}"</h5>
+   <h5>First Name : {{ticket.first_name }}</h5>
+   <h5>Last Name : {{ticket.last_name}}</h5>
+   <h5>Mobile Number : {{ticket.mobile_no}}</h5>
+   <h5>Ticket Class : {{ticket.class_type }}</h5>
+   <h5>Ticket Amount :  &#8377;{{ticket.amount }}</h5><br>
+   
+   <form class='d-inline-block' action="{% url 'bookings:confirm_ticket' ticket.id %}" method="post">
+    {% csrf_token %}
+      <button class='btn float-end btn-success ' type="submit">Confirm</button>
+  </form>
+
+
+{% endblock content %}
+    

@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block title %} Home {% endblock title %}
+    
+{% block content %}
+<div class="container">
+
+  {% if not user.is_staff %}
+  <a href="{% url 'bookings:my_tickets' %}" class="btn btn-outline-primary"> My Tickets</a> <br><br>
+  <h3>Search for Flight</h3>
+  <form method="get">
+    {% csrf_token %}
+    {{ form|crispy }}
+    <button type="submit" class="btn  btn-primary">Search</button>
+    </form>
+    <br><br>
+  {% else %}
+  <a href="{% url 'flight:add_flight' %}" class="btn float-end btn-primary">Add Flight</a>
+  <a href="{% url 'bookings:my_tickets' %}" class="btn  btn-primary">See All Bookings</a><br><br>
+  {% endif %}
+    
+    {% for flight in flights %}
+       
+<div class="row row-cols-1 row-cols-md-2 g-4">
+  <div class="col">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">{{flight.plane_name}}</h5>
+        <p class="card-text">From {{flight.origin}} to {{flight.destination}}</p>
+        <p class="card-text">Departure at : {{flight.departure}}</p>
+        <p class="card-text">Arrive at : {{flight.arrival}}</p>
+        <p class="card-text">Seats Availabe is : {{flight.available_seats}}</p>
+        {% if user.is_staff %}
+        <a href="{% url 'flight:remove_flight' flight.id %}" class="btn float-end btn-danger">Remove</a>
+        {% else %}
+        <a href="{% url 'bookings:ticket_booking' flight.id %}" class="btn float-end btn-primary">Book Now</a>
+        {% endif %}
+       
+      </div>
+    </div><br><br>
+  </div> 
+</div>
+{% endfor %}
+</div>
+
+{% endblock content %}

@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block title %} My Tickets{% endblock title %}
+
+
+{% block content %}
+<a href="{% url 'flight:home' %}" class='btn btn-primary'>Search Flight</a><br><br>
+<h5>My Tickets</h5><br>
+{% for ticket in tickets %}
+       
+<div class="row row-cols-1 row-cols-md-2 g-4">
+  <div class="col">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">{{ticket.flight_id.plane_name}}</h5>
+        <p class="card-text">From {{ticket.flight_id.origin}} to {{ticket.flight_id.destination}}</p>
+        <p class="card-text">Departure at : {{ticket.flight_id.departure}}</p>
+        <p class="card-text">Arrive at : {{ticket.flight_id.arrival}}</p>
+        <p class="card-text">First Name : {{ticket.first_name}}</p>
+        <p class="card-text">Last Name : {{ticket.last_name}}</p>
+      </div>
+    </div><br><br>
+  </div>
+</div>
+{% endfor %}
+{% endblock content %}
+    
